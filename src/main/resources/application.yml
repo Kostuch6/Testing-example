@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: courses
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/courses-db
+    username: postgres
+    password: postgres
+
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        hbm2ddl:
+          charset_name: UTF-8
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+
+  liquibase:
+    change-log: classpath:db/changelog/master-changelog.xml
+    enabled: true
