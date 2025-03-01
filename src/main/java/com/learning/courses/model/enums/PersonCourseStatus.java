@@ -1,6 +1,6 @@
 package com.learning.courses.model.enums;
 
-public enum CourseStatus {
+public enum PersonCourseStatus {
 
   JOINED,
   IN_PROGRESS,

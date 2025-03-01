@@ -16,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @RequiredArgsConstructor
-@Validated
 public class PersonService {
 
   private final PersonRepository personRepository;

@@ -10,4 +10,5 @@ public class ErrorResponseDTO {
 
   private String errorType;
   private Map<String, Object> additionalData;
+  private String message;
 }

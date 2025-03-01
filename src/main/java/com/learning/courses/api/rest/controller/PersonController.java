@@ -5,6 +5,7 @@ import com.learning.courses.dto.PersonDTO;
 import com.learning.courses.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ class PersonController {
 
   @PostMapping
   @Operation(summary = "Create person")
-  public Long createPerson(@RequestBody CreatePersonDTO createPersonDTO) {
+  public Long createPerson(@Valid @RequestBody CreatePersonDTO createPersonDTO) {
     return personService.createPerson(createPersonDTO);
   }
 

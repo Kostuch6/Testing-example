@@ -46,8 +46,8 @@ public class Person {
 
   @ManyToMany
   @JoinTable(name = "person_course",
-      joinColumns = @JoinColumn(name = "person_id", insertable = false, updatable = false),
-      inverseJoinColumns = @JoinColumn(name = "course_id", insertable = false, updatable = false))
+      joinColumns = @JoinColumn(name = "person_id"),
+      inverseJoinColumns = @JoinColumn(name = "course_id"))
   private Set<Course> assignedCourses;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")

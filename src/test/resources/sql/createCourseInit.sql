@@ -1,0 +1,1 @@
+INSERT INTO person(id, first_name, last_name, role, identity_number) VALUES (77, 'Jakub', 'Abacki', 'TUTOR', '1234')

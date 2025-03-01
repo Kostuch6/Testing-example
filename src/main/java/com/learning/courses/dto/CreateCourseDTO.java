@@ -26,6 +26,6 @@ public class CreateCourseDTO implements Serializable {
     private Integer courseLength;
 
     @NotBlank
-    private Integer tutorId;
+    private Long tutorId;
 
 }

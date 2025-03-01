@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +31,7 @@ public class CreatePersonDTO implements Serializable {
   @Schema(example = "123456789")
   protected String identityNumber;
 
-  @NotBlank
+  @NotNull
   @Schema(example = "TUTOR")
   protected Role role;
 }
