@@ -1,6 +1,6 @@
 package com.learning.courses.model;
 
-import com.learning.courses.model.enums.CourseStatus;
+import com.learning.courses.model.enums.PersonCourseStatus;
 import com.learning.courses.model.enums.Degree;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -42,7 +42,7 @@ public class PersonCourse {
   private Course course;
 
   @Enumerated(EnumType.STRING)
-  private CourseStatus status;
+  private PersonCourseStatus status;
 
   @Enumerated(EnumType.STRING)
   private Degree degree;

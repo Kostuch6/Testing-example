@@ -35,7 +35,7 @@ public class Course {
   private Integer courseLength;
 
   @ManyToOne
-  @JoinColumn(name = "tutor_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+  @JoinColumn(name = "tutor_id", referencedColumnName = "id", nullable = false)
   private Person tutor;
 
   @ManyToMany(mappedBy = "assignedCourses")

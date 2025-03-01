@@ -1,6 +1,6 @@
 package com.learning.courses.service;
 
-import com.learning.courses.model.enums.CourseStatus;
+import com.learning.courses.model.enums.PersonCourseStatus;
 import com.learning.courses.model.enums.Degree;
 import com.learning.courses.model.enums.Role;
 import java.util.Arrays;
@@ -18,8 +18,8 @@ public class DictionaryService {
     return Arrays.stream(Role.values()).toList();
   }
 
-  public List<CourseStatus> getCourseStatuses() {
-    return Arrays.stream(CourseStatus.values()).toList();
+  public List<PersonCourseStatus> getCourseStatuses() {
+    return Arrays.stream(PersonCourseStatus.values()).toList();
   }
 
 }

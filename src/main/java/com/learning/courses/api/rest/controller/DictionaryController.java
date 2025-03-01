@@ -1,6 +1,6 @@
 package com.learning.courses.api.rest.controller;
 
-import com.learning.courses.model.enums.CourseStatus;
+import com.learning.courses.model.enums.PersonCourseStatus;
 import com.learning.courses.model.enums.Degree;
 import com.learning.courses.model.enums.Role;
 import com.learning.courses.service.DictionaryService;
@@ -34,7 +34,7 @@ class DictionaryController {
 
   @GetMapping("/statuses")
   @Operation(summary = "Get all course statuses")
-  public List<CourseStatus> getCourseStatuses() {
+  public List<PersonCourseStatus> getCourseStatuses() {
     return dictionaryService.getCourseStatuses();
   }
 }
