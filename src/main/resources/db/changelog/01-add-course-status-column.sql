@@ -1,0 +1,2 @@
+ALTER TABLE course
+ADD status varchar(255) NOT NULL DEFAULT 'CREATED';

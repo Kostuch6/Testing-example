@@ -2,6 +2,8 @@ package com.learning.courses.config;
 
 import com.learning.courses.exception.EntityNotFoundException;
 import com.learning.courses.exception.ExceptionMapper;
+import com.learning.courses.exception.InvalidRoleException;
+import com.learning.courses.exception.OngoingCourseModifyException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +33,22 @@ public class GlobalExceptionHandler {
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
             .body(exceptionMapper.toErrorResponseDTO(integrityViolationException));
+  }
+
+  @ExceptionHandler(InvalidRoleException.class)
+  public ResponseEntity<ErrorResponseDTO> handleInvalidRoleException(InvalidRoleException invalidRoleException) {
+    log.error(invalidRoleException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(invalidRoleException));
+  }
+
+  @ExceptionHandler(OngoingCourseModifyException.class)
+  public ResponseEntity<ErrorResponseDTO> handleOngoingCourseModifyException(OngoingCourseModifyException courseModifyException) {
+    log.error(courseModifyException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(courseModifyException));
   }
 
 }
