@@ -35,6 +35,12 @@ public class PersonService {
         .orElseThrow(() -> new EntityNotFoundException(id, Person.class.getSimpleName()));
   }
 
+  @Transactional(readOnly = true)
+  public Person getPersonEntity(@NotNull @Positive Long id) {
+    return personRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(id, Person.class.getSimpleName()));
+  }
+
   @Transactional
   public PersonDTO updatePerson(Long id, PersonDTO updatedPerson) {
     var person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Person.class.getSimpleName()));

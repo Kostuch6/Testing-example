@@ -1,14 +1,8 @@
 package com.learning.courses.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import com.learning.courses.model.enums.CourseStatus;
+import jakarta.persistence.*;
+
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +27,9 @@ public class Course {
   private String courseName;
 
   private Integer courseLength;
+
+  @Enumerated(EnumType.STRING)
+  private CourseStatus status;
 
   @ManyToOne
   @JoinColumn(name = "tutor_id", referencedColumnName = "id", nullable = false)

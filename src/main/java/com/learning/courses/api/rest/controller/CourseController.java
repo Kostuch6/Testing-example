@@ -2,12 +2,14 @@ package com.learning.courses.api.rest.controller;
 
 import com.learning.courses.dto.CourseDTO;
 import com.learning.courses.dto.CreateCourseDTO;
-import com.learning.courses.model.enums.Degree;
+import com.learning.courses.model.enums.CourseStatus;
 import com.learning.courses.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,11 +25,11 @@ public class CourseController {
         return courseService.createCourse(createCourseDTO);
     }
 
-//    @GetMapping
-//    @Operation(summary = "Get course")
-//    public CourseDTO getAllCourses(@RequestParam String courseStatus) {
-//        return courseService.getAllCourses(courseStatus);
-//    }
+    @GetMapping
+    @Operation(summary = "Get course")
+    public List<CourseDTO> getAllCourses() {
+        return courseService.getAllCourses();
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get course")
@@ -47,7 +49,15 @@ public class CourseController {
         return courseService.updateCourse(id, updatedCourse);
     }
 
-    public void finishCourse(Long studentId, Degree degree) {
-        
+    @PatchMapping("/{id}/start")
+    @Operation(summary = "Start course")
+    public CourseStatus startCourse(@PathVariable Long id) {
+        return courseService.startCourse(id);
+    }
+
+    @PatchMapping("/{id}/finish")
+    @Operation(summary = "Finish course")
+    public CourseStatus finishCourse(@PathVariable Long id) {
+        return courseService.finishCourse(id);
     }
 }

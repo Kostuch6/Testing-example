@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface CourseMapper {
 
+    @Mapping(target = "status", constant = "CREATED")
     @Mapping(target = "tutor.id", source = "tutorId")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "assignedStudents", ignore = true)
