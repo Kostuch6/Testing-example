@@ -2,6 +2,8 @@ package com.learning.courses.config;
 
 import com.learning.courses.exception.EntityNotFoundException;
 import com.learning.courses.exception.ExceptionMapper;
+import com.learning.courses.exception.InvalidRoleException;
+import com.learning.courses.exception.OngoingCourseModifyException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
