@@ -33,4 +33,24 @@ public abstract class ExceptionMapper {
   @Mapping(target = "message", expression = "java( ex.getMessage() )")
   public abstract ErrorResponseDTO toErrorResponseDTO(OngoingCourseModifyException ex);
 
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( ex.getMessage() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(OngoingCourseJoinException ex);
+
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( ex.getMessage() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(EmptyCourseException ex);
+
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( ex.getMessage() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(InactiveCourseModifyException ex);
+
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( ex.getMessage() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(MissingGradeException ex);
+
 }

@@ -6,13 +6,11 @@ import com.learning.courses.exception.EntityNotFoundException;
 import com.learning.courses.mapper.PersonMapper;
 import com.learning.courses.model.Person;
 import com.learning.courses.repository.PersonRepository;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 @Service
 @RequiredArgsConstructor
