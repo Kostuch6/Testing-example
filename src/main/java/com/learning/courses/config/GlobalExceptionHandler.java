@@ -1,9 +1,6 @@
 package com.learning.courses.config;
 
-import com.learning.courses.exception.EntityNotFoundException;
-import com.learning.courses.exception.ExceptionMapper;
-import com.learning.courses.exception.InvalidRoleException;
-import com.learning.courses.exception.OngoingCourseModifyException;
+import com.learning.courses.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -49,6 +46,38 @@ public class GlobalExceptionHandler {
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
             .body(exceptionMapper.toErrorResponseDTO(courseModifyException));
+  }
+
+  @ExceptionHandler(OngoingCourseJoinException.class)
+  public ResponseEntity<ErrorResponseDTO> handleOngoingCourseJoinException(OngoingCourseJoinException courseJoinException) {
+    log.error(courseJoinException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(courseJoinException));
+  }
+
+  @ExceptionHandler(EmptyCourseException.class)
+  public ResponseEntity<ErrorResponseDTO> handleEmptyCourseException(EmptyCourseException emptyCourseException) {
+    log.error(emptyCourseException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(emptyCourseException));
+  }
+
+  @ExceptionHandler(InactiveCourseModifyException.class)
+  public ResponseEntity<ErrorResponseDTO> handleInactiveCourseModifyException(InactiveCourseModifyException inactiveCourseModifyException) {
+    log.error(inactiveCourseModifyException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(inactiveCourseModifyException));
+  }
+
+  @ExceptionHandler(MissingGradeException.class)
+  public ResponseEntity<ErrorResponseDTO> handleMissingGradeException(MissingGradeException missingGradeException) {
+    log.error(missingGradeException.getMessage());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+            .body(exceptionMapper.toErrorResponseDTO(missingGradeException));
   }
 
 }

@@ -4,6 +4,7 @@ import com.learning.courses.dto.CourseDTO;
 import com.learning.courses.dto.CreateCourseDTO;
 import com.learning.courses.model.enums.CourseStatus;
 import com.learning.courses.service.CourseService;
+import com.learning.courses.service.PersonCourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final PersonCourseService personCourseService;
 
     @PostMapping
     @Operation(summary = "Create course")
@@ -59,5 +61,11 @@ public class CourseController {
     @Operation(summary = "Finish course")
     public CourseStatus finishCourse(@PathVariable Long id) {
         return courseService.finishCourse(id);
+    }
+
+    @PatchMapping("/{courseId}/persons/{personId}")
+    @Operation(summary = "Add student to course")
+    public void addStudentToCourse(@PathVariable Long courseId, @PathVariable Long personId) {
+        personCourseService.assignPersonToCourse(courseId, personId);
     }
 }

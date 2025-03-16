@@ -2,19 +2,17 @@ package com.learning.courses.service;
 
 import com.learning.courses.dto.CourseDTO;
 import com.learning.courses.dto.CreateCourseDTO;
-import com.learning.courses.exception.EntityNotFoundException;
-import com.learning.courses.exception.InvalidRoleException;
-import com.learning.courses.exception.OngoingCourseModifyException;
+import com.learning.courses.exception.*;
 import com.learning.courses.mapper.CourseMapper;
 import com.learning.courses.model.Course;
 import com.learning.courses.model.enums.CourseStatus;
 import com.learning.courses.model.enums.Role;
 import com.learning.courses.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +39,12 @@ public class CourseService {
     public CourseDTO getCourse(Long id) {
         return courseRepository.findById(id)
                 .map(courseMapper::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException(id, Course.class.getSimpleName()));
+    }
+
+    @Transactional(readOnly = true)
+    public Course getCourseEntity(Long id) {
+        return courseRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, Course.class.getSimpleName()));
     }
 
@@ -76,6 +80,9 @@ public class CourseService {
     @Transactional
     public CourseStatus startCourse(Long id) {
         var course = courseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Course.class.getSimpleName()));
+        if (CollectionUtils.isEmpty(course.getStudents())) {
+            throw new EmptyCourseException("Can't start course with no students");
+        }
         if (course.getStatus() != CourseStatus.CREATED) {
             throw new OngoingCourseModifyException("Can't start ongoing course");
         }
@@ -89,7 +96,12 @@ public class CourseService {
         if (course.getStatus() != CourseStatus.IN_PROGRESS) {
             throw new OngoingCourseModifyException("Can't finish new or finished course");
         }
+        var unfinishedGraduating = course.getAssignedPersonCourse().stream().anyMatch(a -> a.getDegree() == null);
+        if (unfinishedGraduating) {
+            throw new MissingGradeException("There are students without grades in this course");
+        }
         course.setStatus(CourseStatus.FINISHED);
         return course.getStatus();
     }
+
 }

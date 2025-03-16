@@ -2,13 +2,13 @@ package com.learning.courses.model;
 
 import com.learning.courses.model.enums.CourseStatus;
 import jakarta.persistence.*;
-
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Validated
 @NoArgsConstructor
@@ -35,6 +35,10 @@ public class Course {
   @JoinColumn(name = "tutor_id", referencedColumnName = "id", nullable = false)
   private Person tutor;
 
-  @ManyToMany(mappedBy = "assignedCourses")
-  private Set<Person> assignedStudents;
+  @OneToMany(mappedBy = "course")
+  private List<PersonCourse> assignedPersonCourse;
+
+  public List<Person> getStudents() {
+    return assignedPersonCourse.stream().map(PersonCourse::getStudent).toList();
+  }
 }
