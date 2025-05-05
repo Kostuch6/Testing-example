@@ -35,11 +35,20 @@ public class Person {
 
   @ManyToMany
   @JoinTable(name = "person_course",
-      joinColumns = @JoinColumn(name = "person_id"),
-      inverseJoinColumns = @JoinColumn(name = "course_id"))
+          joinColumns = @JoinColumn(name = "person_id"),
+          inverseJoinColumns = @JoinColumn(name = "course_id"))
   private List<Course> assignedCourses;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
   private List<Course> tutoringCourses;
+
+  @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Contact> contacts;
+
+  public void setContact(List<Contact> contacts) {
+    if (this.role != Role.STUDENT && contacts != null && !contacts.isEmpty()) {
+      throw new IllegalStateException("Only Student can add contacts");
+    }
+  }
 
 }
