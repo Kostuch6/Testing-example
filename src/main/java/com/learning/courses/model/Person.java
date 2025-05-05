@@ -41,5 +41,9 @@ public class Person {
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
   private List<Course> tutoringCourses;
-
+  //npaper assigned to tutor
+  @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Paper> papers;
 }
+//podman run -d --name COURSES_LOCAL2 -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=courses-db postgres:14.15-alpine
+//
