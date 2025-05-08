@@ -26,7 +26,7 @@ public class PaperService {
     }
 
     @Transactional
-    public PaperDTO createPaper(CreatePaperDTO dto) {
+    public Long createPaper(CreatePaperDTO dto) {
         // 1) zamapuj podstawowe pola
         Paper paper = paperMapper.toEntity(dto);
 
@@ -40,8 +40,9 @@ public class PaperService {
         // 3) ustaw powiązanie
         paper.setTutor(tutor);
 
-        // 4) zapisz i zamapuj na DTO
-        Paper saved = paperRepo.save(paper);
-        return paperMapper.toDTO(saved);
+        // 4) zapisz
+        paperMapper.toEntity(dto);
+        // 5) Zwróć id zapisanej osoby
+        return paperRepo.save(paper).getId();
     }
 }

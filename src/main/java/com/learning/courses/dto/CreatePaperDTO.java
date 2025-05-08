@@ -33,6 +33,6 @@ public class CreatePaperDTO implements Serializable {
     private List<String> additionalAuthors;
 
     @NotNull
-    @Schema(example = "5", description = "ID istniejącego tutora (Person.role = TUTOR)")
+    @Schema(example = "1", description = "ID istniejącego tutora (Person.role = TUTOR)")
     private Long tutorId;
 }

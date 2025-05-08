@@ -19,10 +19,7 @@ public class PaperController {
     }
 
     @PostMapping
-    public ResponseEntity<PaperDTO> createPaper(@Valid @RequestBody CreatePaperDTO dto) {
-        PaperDTO created = paperService.createPaper(dto);
-        return ResponseEntity
-                .status(201)
-                .body(created);
+    public Long createPaper(@Valid @RequestBody CreatePaperDTO dto) {
+        return paperService.createPaper(dto);
     }
 }
