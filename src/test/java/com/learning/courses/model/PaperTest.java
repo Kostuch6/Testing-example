@@ -9,23 +9,54 @@ public class PaperTest {
 
 
     @Test
-    void shouldCreatePaperWithValidData() {
-        // Test that a paper object is created with correct attributes
+    void shouldCreatePaperWithValidISBN() {
+
+    }
+    @Test
+    void shouldNotCreatePaperWithInvalidISBN() {
+
     }
 
     @Test
-    void shouldAllowMultipleAuthorsInPaper() {
+    void shouldNotCreatePaperWithEmptyAuthorList() {}
+
+    @Test
+    void shouldNotCreatePaperWithNullAuthorList() {}
+
+    @Test
+    void shouldCreatePaperWithMultipleAuthors() {
         // Test that the paper correctly stores a list of authors
     }
 
     @Test
-    void shouldHandleMissingOptionalFields() {
-        // Test paper creation when some optional fields like content are missing
+    void shouldNotCreatePaperWithEmptyTypeOfPaper() {
+
+    }
+    @Test
+    void shouldCreatePaperWhenTypeOfPaperIsNotEmpty() {
+
     }
 
     @Test
-    void shouldRejectInvalidISBNFormat() {
-        // Test handling of invalid ISBN format (if validation is added)
+    void shouldNotCreatePaperWithEmptyTopic() {
+
     }
+
+    @Test
+    void shouldCreatePaperWhenTopicIsNotEmpty() {
+
+    }
+
+    @Test
+    void shouldCreateValidPaperWithAllFields() {
+
+    }
+    @Test
+    void shouldCreatePaperWithMissingOptionalFields() {
+            //paper without content should be created
+    }
+
+
+
 
 }

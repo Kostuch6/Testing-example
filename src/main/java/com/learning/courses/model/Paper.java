@@ -20,7 +20,7 @@ public class Paper {
 
     @NotEmpty
     String Topic;
-    @NotEmpty
+
     String Content;
 
 }
