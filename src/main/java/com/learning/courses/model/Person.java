@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+
 
 import java.util.List;
 
@@ -41,5 +44,7 @@ public class Person {
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
   private List<Course> tutoringCourses;
+  @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Contact> contacts = new HashSet<>();
 
 }
