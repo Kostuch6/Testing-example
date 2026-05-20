@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import com.learning.courses.model.Paper;
 
 @Validated
 @NoArgsConstructor
@@ -41,5 +42,8 @@ public class Person {
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
   private List<Course> tutoringCourses;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
+  private List<Paper> papers;
 
 }
