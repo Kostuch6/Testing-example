@@ -3,7 +3,6 @@ package com.learning.courses.service;
 import com.learning.courses.dto.CreatePaperDTO;
 import com.learning.courses.dto.PaperDTO;
 import com.learning.courses.exception.EntityNotFoundException;
-import com.learning.courses.exception.InvalidRoleException;
 import com.learning.courses.mapper.PaperMapper;
 import com.learning.courses.model.Paper;
 import com.learning.courses.model.enums.Role;
