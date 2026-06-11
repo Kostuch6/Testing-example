@@ -3,6 +3,7 @@ package com.learning.courses.service;
 import com.learning.courses.dto.CreatePaperDTO;
 import com.learning.courses.dto.PaperDTO;
 import com.learning.courses.exception.EntityNotFoundException;
+import com.learning.courses.exception.InvalidRoleException;
 import com.learning.courses.mapper.PaperMapper;
 import com.learning.courses.model.Paper;
 import com.learning.courses.model.enums.Role;
@@ -25,7 +26,7 @@ public class PaperService {
     public Long createPaper(CreatePaperDTO createPaperDTO) {
         var tutor = personService.getPersonEntity(createPaperDTO.getTutorId());
         if (tutor.getRole() != Role.TUTOR) {
-            throw null;
+            throw new InvalidRoleException(createPaperDTO.getTutorId(), Role.TUTOR, tutor.getRole());
         }
         Paper paper = paperMapper.toEntity(createPaperDTO);
         return paperRepository.save(paper).getId();
@@ -47,6 +48,24 @@ public class PaperService {
     @Transactional(readOnly = true)
     public List<PaperDTO> getAllPapers() {
         return paperMapper.toDTO(paperRepository.findAll());
+    }
+
+    @Transactional
+    public PaperDTO updatePaper(Long id, CreatePaperDTO updatePaperDTO) {
+        Paper paper = paperRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, Paper.class.getSimpleName()));
+        var tutor = personService.getPersonEntity(updatePaperDTO.getTutorId());
+        if (tutor.getRole() != Role.TUTOR) {
+            throw new InvalidRoleException(updatePaperDTO.getTutorId(), Role.TUTOR, tutor.getRole());
+        }
+        paper.setTitle(updatePaperDTO.getTitle());
+        paper.setType(updatePaperDTO.getType());
+        paper.setTopic(updatePaperDTO.getTopic());
+        paper.setIsbn(updatePaperDTO.getIsbn());
+        paper.setAdditionalAuthors(updatePaperDTO.getAdditionalAuthors());
+        paper.setPublicationYear(updatePaperDTO.getPublicationYear());
+        paper.setTutor(tutor);
+        return paperMapper.toDTO(paperRepository.save(paper));
     }
 
     @Transactional

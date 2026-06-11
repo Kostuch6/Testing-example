@@ -5,6 +5,7 @@ import com.learning.courses.dto.PaperDTO;
 import com.learning.courses.service.PaperService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,14 @@ public class PaperController {
 
     @PostMapping
     @Operation(summary = "Create paper")
-    public Long createPaper(@RequestBody CreatePaperDTO createPaperDTO) {
+    public Long createPaper(@Valid @RequestBody CreatePaperDTO createPaperDTO) {
         return paperService.createPaper(createPaperDTO);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update paper")
+    public PaperDTO updatePaper(@PathVariable Long id, @Valid @RequestBody CreatePaperDTO updatePaperDTO) {
+        return paperService.updatePaper(id, updatePaperDTO);
     }
 
     @GetMapping

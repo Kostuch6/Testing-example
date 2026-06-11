@@ -27,15 +27,19 @@ public class CreatePaperDTO implements Serializable {
     @Schema(example = "ARTICLE")
     private PaperType type;
 
+    @NotBlank
     @Schema(example = "Computer Science")
     private String topic;
 
+    @NotBlank
     @Schema(example = "978-3-16-148410-0")
     private String isbn;
 
+    @NotBlank
     @Schema(example = "John Smith, Jane Doe")
     private String additionalAuthors;
 
+    @NotNull
     @Schema(example = "2024")
     private Integer publicationYear;
 

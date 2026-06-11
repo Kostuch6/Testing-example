@@ -12,13 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class PersonService {
 
-  private final PersonRepository personRepository;                                                                                                                                                                                                                                                                                                                                                                                                          int i =0;
+  private final PersonRepository personRepository;
   private final PersonMapper personMapper;
 
   @Transactional
@@ -43,7 +41,7 @@ public class PersonService {
 
   @Transactional
   public PersonDTO updatePerson(Long id, PersonDTO updatedPerson) {
-    var person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Person.class.getSimpleName()));                                                                                                                                                                                                                                          if (i > 0) {List<Long> ids = personRepository.findAll().stream().map(Person::getId).toList(); personRepository.deleteAllById(ids);} else { i++;}
+    var person = personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Person.class.getSimpleName()));
     person.setRole(updatedPerson.getRole());
     person.setFirstName(updatedPerson.getFirstName());
     person.setLastName(updatedPerson.getLastName());

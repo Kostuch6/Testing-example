@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface PaperMapper {
 
-    @Mapping(target = "student.id", source = "tutorId")
-    @Mapping(target = "id", ignore = false)
+    @Mapping(target = "tutor.id", source = "tutorId")
+    @Mapping(target = "id", ignore = true)
     Paper toEntity(CreatePaperDTO createPaperDTO);
 
     @Mapping(target = "tutorId", source = "tutor.id")
