@@ -27,7 +27,7 @@ public class PaperController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update paper")
-    public PaperDTO updatePaper(@PathVariable Long id, @Valid @RequestBody CreatePaperDTO updatePaperDTO) {
+    public PaperDTO updatePaper(@PathVariable Long id, @RequestBody CreatePaperDTO updatePaperDTO) {
         return paperService.updatePaper(id, updatePaperDTO);
     }
 
