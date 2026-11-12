@@ -1,6 +1,8 @@
 package com.learning.courses.dto;
 
 import java.io.Serializable;
+
+import com.learning.courses.model.enums.CourseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +16,7 @@ import lombok.experimental.SuperBuilder;
 public class CourseDTO extends CreateCourseDTO implements Serializable {
 
   private Long id;
+
+  private CourseStatus status;
 
 }

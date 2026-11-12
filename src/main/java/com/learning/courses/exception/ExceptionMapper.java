@@ -15,12 +15,21 @@ public abstract class ExceptionMapper {
 
   @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
   @Mapping(target = "additionalData", expression = "java( objectMapper.convertValue(ex, new com.fasterxml.jackson.core.type.TypeReference<>() {}) )")
-  @Mapping(target = "message", expression = "java( ex.getMessage() )")
   public abstract ErrorResponseDTO toErrorResponseDTO(EntityNotFoundException ex);
 
   @Mapping(target = "additionalData", ignore = true)
   @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
   @Mapping(target = "message", expression = "java( ex.getMessage() )")
   public abstract ErrorResponseDTO toErrorResponseDTO(DataIntegrityViolationException ex);
+
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( \"Invalid role: \" + ex.getActualRole() + \". Expected role is: \" + ex.getExpectedRole() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(InvalidRoleException ex);
+
+  @Mapping(target = "additionalData", ignore = true)
+  @Mapping(target = "errorType", expression = "java( ex.getClass().getSimpleName() )")
+  @Mapping(target = "message", expression = "java( ex.getMessage() )")
+  public abstract ErrorResponseDTO toErrorResponseDTO(OngoingCourseModifyException ex);
 
 }
