@@ -48,7 +48,7 @@ public class CourseControllerIT extends AbstractIntegrationTest {
             assertThat(courseOpt).isPresent()
                     .map(Course::getTutor)
                     .map(Person::getId).get()
-                    .isEqualTo(TUTOR_ID);
+                    .isEqualTo(100L);
         }
     }
 }
