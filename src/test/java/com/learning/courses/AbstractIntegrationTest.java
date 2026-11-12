@@ -8,13 +8,17 @@ import io.zonky.test.db.AutoConfigureEmbeddedDatabase.RefreshMode;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -40,6 +44,14 @@ public class AbstractIntegrationTest {
         httpRequest.setEntity(entity);
         httpRequest.setHeader("Accept", "application/json");
         httpRequest.setHeader("Content-type", "application/json");
+    }
+
+    protected void initRequestWithFile(File file, HttpEntityEnclosingRequestBase httpRequest) {
+        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addBinaryBody("file", file, ContentType.DEFAULT_BINARY, file.getName());
+
+        httpRequest.setEntity(builder.build());
     }
 
     protected HttpHost getHttpHost() {
