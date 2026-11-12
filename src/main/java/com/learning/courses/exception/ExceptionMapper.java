@@ -5,6 +5,7 @@ import com.learning.courses.config.ErrorResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Mapper
 public abstract class ExceptionMapper {
