@@ -15,7 +15,7 @@ public interface CourseMapper {
     @Mapping(target = "status", constant = "CREATED")
     @Mapping(target = "tutor.id", source = "tutorId")
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "assignedStudents", ignore = true)
+    @Mapping(target = "assignedPersonCourse", ignore = true)
     Course toEntity(CreateCourseDTO createCourseDTO);
 
     @Mapping(target = "tutorId", source = "tutor.id")

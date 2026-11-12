@@ -1,7 +1,9 @@
 package com.learning.courses.api.rest.controller;
 
 import com.learning.courses.dto.CreatePersonDTO;
+import com.learning.courses.dto.DegreeDTO;
 import com.learning.courses.dto.PersonDTO;
+import com.learning.courses.service.PersonCourseService;
 import com.learning.courses.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 class PersonController {
 
   private final PersonService personService;
+  private final PersonCourseService personCourseService;
 
   @PostMapping
   @Operation(summary = "Create person")
@@ -35,12 +38,10 @@ class PersonController {
     return personService.updatePerson(id, updatedPerson);
   }
 
-  public void addStudentToCourse() {
-
-  }
-
-  public void getAllPersonCourses() {
-
+  @PatchMapping("/grade")
+  @Operation(summary = "Grade a student")
+  public void gradeStudent(@RequestBody @Valid DegreeDTO degreeDTO) {
+    personCourseService.gradeStudent(degreeDTO);
   }
 
 }
